@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Day 3 No Matter How You Slice It | Advent of Code 2018</title>
+  <meta name="description" content="My attempt at the 2018 Advent of Code puzzles.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Day 3 No Matter How You Slice It | Advent of Code 2018 />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="My attempt at the 2018 Advent of Code puzzles." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Day 3 No Matter How You Slice It | Advent of Code 2018 />
+  
+  <meta name="twitter:description" content="My attempt at the 2018 Advent of Code puzzles." />
+  
+
+<meta name="author" content="María Paula Caldas">
+
+
+<meta name="date" content="2019-01-17">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="day2.html">
+<link rel="next" href="day4.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Advent of Code 2018</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Technical details</a></li>
+<li class="chapter" data-level="1" data-path="day1.html"><a href="day1.html"><i class="fa fa-check"></i><b>1</b> Chronal Calibration</a><ul>
+<li class="chapter" data-level="" data-path="day1.html"><a href="day1.html#instructions"><i class="fa fa-check"></i>Instructions</a></li>
+<li class="chapter" data-level="1.1" data-path="day1.html"><a href="day1.html#starting-with-a-frequency-of-zero-what-is-the-resulting-frequency-after-all-of-the-changes-in-frequency-have-been-applied"><i class="fa fa-check"></i><b>1.1</b> Starting with a frequency of zero, what is the resulting frequency after all of the changes in frequency have been applied?</a></li>
+<li class="chapter" data-level="1.2" data-path="day1.html"><a href="day1.html#what-is-the-first-frequency-your-device-reaches-twice"><i class="fa fa-check"></i><b>1.2</b> What is the first frequency your device reaches twice?</a></li>
+<li class="chapter" data-level="" data-path="day1.html"><a href="day1.html#failed-attempts"><i class="fa fa-check"></i>Failed attempts</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="day2.html"><a href="day2.html"><i class="fa fa-check"></i><b>2</b> Inventory Management System</a><ul>
+<li class="chapter" data-level="" data-path="day2.html"><a href="day2.html#instructions-1"><i class="fa fa-check"></i>Instructions</a></li>
+<li class="chapter" data-level="2.1" data-path="day2.html"><a href="day2.html#what-is-the-checksum-for-your-list-of-box-ids"><i class="fa fa-check"></i><b>2.1</b> What is the checksum for your list of box IDs?</a></li>
+<li class="chapter" data-level="2.2" data-path="day2.html"><a href="day2.html#what-letters-are-common-between-the-two-correct-box-ids"><i class="fa fa-check"></i><b>2.2</b> What letters are common between the two correct box IDs?</a><ul>
+<li class="chapter" data-level="" data-path="day2.html"><a href="day2.html#for-future-reference"><i class="fa fa-check"></i>For future reference</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="day3.html"><a href="day3.html"><i class="fa fa-check"></i><b>3</b> No Matter How You Slice It</a><ul>
+<li class="chapter" data-level="" data-path="day3.html"><a href="day3.html#instructions-2"><i class="fa fa-check"></i>Instructions</a></li>
+<li class="chapter" data-level="3.1" data-path="day3.html"><a href="day3.html#how-many-square-inches-of-fabric-are-within-two-or-more-claims"><i class="fa fa-check"></i><b>3.1</b> How many square inches of fabric are within two or more claims?</a></li>
+<li class="chapter" data-level="3.2" data-path="day3.html"><a href="day3.html#what-is-the-id-of-the-only-claim-that-doesnt-overlap"><i class="fa fa-check"></i><b>3.2</b> What is the ID of the only claim that doesn’t overlap?</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="day4.html"><a href="day4.html"><i class="fa fa-check"></i><b>4</b> Repose Record</a><ul>
+<li class="chapter" data-level="" data-path="day4.html"><a href="day4.html#instructions-3"><i class="fa fa-check"></i>Instructions</a></li>
+<li class="chapter" data-level="4.1" data-path="day4.html"><a href="day4.html#what-is-the-id-of-the-guard-you-chose-multiplied-by-the-minute-you-chose"><i class="fa fa-check"></i><b>4.1</b> What is the ID of the guard you chose multiplied by the minute you chose?</a></li>
+<li class="chapter" data-level="4.2" data-path="day4.html"><a href="day4.html#of-all-guards-which-guard-is-most-frequently-asleep-on-the-same-minute"><i class="fa fa-check"></i><b>4.2</b> Of all guards, which guard is most frequently asleep on the same minute?</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="day5.html"><a href="day5.html"><i class="fa fa-check"></i><b>5</b> Alchemical Reduction</a><ul>
+<li class="chapter" data-level="" data-path="day5.html"><a href="day5.html#instructions-4"><i class="fa fa-check"></i>Instructions</a></li>
+<li class="chapter" data-level="5.1" data-path="day5.html"><a href="day5.html#how-many-units-remain-after-fully-reacting-the-polymer-you-scanned"><i class="fa fa-check"></i><b>5.1</b> How many units remain after fully reacting the polymer you scanned?</a></li>
+<li class="chapter" data-level="5.2" data-path="day5.html"><a href="day5.html#what-is-the-length-of-the-shortest-polymer-you-can-produce-by-removing-all-units-of-exactly-one-type-and-fully-reacting-the-result"><i class="fa fa-check"></i><b>5.2</b> What is the length of the shortest polymer you can produce by removing all units of exactly one type and fully reacting the result?</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="day6.html"><a href="day6.html"><i class="fa fa-check"></i><b>6</b> Alchemical Reduction</a><ul>
+<li class="chapter" data-level="" data-path="day6.html"><a href="day6.html#instructions-5"><i class="fa fa-check"></i>Instructions</a></li>
+<li class="chapter" data-level="6.1" data-path="day6.html"><a href="day6.html#what-is-the-size-of-the-largest-area-that-isnt-infinite"><i class="fa fa-check"></i><b>6.1</b> What is the size of the largest area that isn’t infinite?</a></li>
+<li class="chapter" data-level="6.2" data-path="day6.html"><a href="day6.html#what-is-the-size-of-the-region-containing-all-locations-which-have-a-total-distance-to-all-given-coordinates-of-less-than-10000"><i class="fa fa-check"></i><b>6.2</b> What is the size of the region containing all locations which have a total distance to all given coordinates of less than 10000?</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Advent of Code 2018</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="day3" class="section level1">
+<h1><span class="header-section-number">Day 3</span> No Matter How You Slice It</h1>
+<div id="instructions-2" class="section level2 unnumbered">
+<h2>Instructions</h2>
+<p>The Elves managed to locate the chimney-squeeze prototype fabric for Santa’s suit (thanks to someone who helpfully wrote its box IDs on the wall of the warehouse in the middle of the night). Unfortunately, anomalies are still affecting them - nobody can even agree on how to cut the fabric.</p>
+<p>The whole piece of fabric they’re working on is a very large square - at least 1000 inches on each side.</p>
+<p>Each Elf has made a claim about which area of fabric would be ideal for Santa’s suit. All claims have an ID and consist of a single rectangle with edges parallel to the edges of the fabric. Each claim’s rectangle is defined as follows:</p>
+<p>The number of inches between the left edge of the fabric and the left edge of the rectangle.
+The number of inches between the top edge of the fabric and the top edge of the rectangle.
+The width of the rectangle in inches.
+The height of the rectangle in inches.
+A claim like #123 @ 3,2: 5x4 means that claim ID 123 specifies a rectangle 3 inches from the left edge, 2 inches from the top edge, 5 inches wide, and 4 inches tall. Visually, it claims the square inches of fabric represented by # (and ignores the square inches of fabric represented by .) in the diagram below:</p>
+<pre><code>...........
+...........
+...#####...
+...#####...
+...#####...
+...#####...
+...........
+...........
+...........</code></pre>
+<p>The problem is that many of the claims overlap, causing two or more claims to cover part of the same areas. For example, consider the following claims:</p>
+<ul>
+<li>#1 @ 1,3: 4x4</li>
+<li>#2 @ 3,1: 4x4</li>
+<li>#3 @ 5,5: 2x2</li>
+</ul>
+<p>Visually, these claim the following areas:</p>
+<pre><code>........
+...2222.
+...2222.
+.11XX22.
+.11XX22.
+.111133.
+.111133.
+........</code></pre>
+<p>The four square inches marked with X are claimed by both 1 and 2. (Claim 3, while adjacent to the others, does not overlap either of them.)</p>
+<p>If the Elves all proceed with their own plans, none of them will have enough fabric. <strong>How many square inches of fabric are within two or more claims?</strong></p>
+<p>Amidst the chaos, you notice that exactly one claim doesn’t overlap by even a single square inch of fabric with any other claim. If you can somehow draw attention to it, maybe the Elves will be able to make Santa’s suit after all!</p>
+<p>For example, in the claims above, only claim 3 is intact after all claims are made.</p>
+<p><strong>What is the ID of the only claim that doesn’t overlap?</strong></p>
+</div>
+<div id="how-many-square-inches-of-fabric-are-within-two-or-more-claims" class="section level2">
+<h2><span class="header-section-number">3.1</span> How many square inches of fabric are within two or more claims?</h2>
+<p>Import puzzle imput for the day:</p>
+<pre class="sourceCode r"><code class="sourceCode r">puzzle_input &lt;-<span class="st"> </span><span class="kw">readLines</span>(<span class="st">&quot;data-raw/day3.txt&quot;</span>, <span class="dt">warn =</span> <span class="ot">FALSE</span>)</code></pre>
+<p>First, I tried to recreate the example to test my functions. I translated the information of the strings into two cute little tibbles.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#1 @ 1,3: 4x4</span>
+test1 &lt;-<span class="st"> </span><span class="kw">tibble</span>(
+  <span class="dt">x_start =</span> <span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>,
+  <span class="dt">x_end   =</span> <span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">4</span>,
+  <span class="dt">y_start =</span> <span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>,
+  <span class="dt">y_end   =</span> <span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="dv">4</span>
+)
+
+<span class="co">#2 @ 3,1: 4x4</span>
+test2 &lt;-<span class="st"> </span><span class="kw">tibble</span>(
+  <span class="dt">x_start =</span> <span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>,
+  <span class="dt">x_end   =</span> <span class="dv">3</span> <span class="op">+</span><span class="st"> </span><span class="dv">4</span>,
+  <span class="dt">y_start =</span> <span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>,
+  <span class="dt">y_end   =</span> <span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">4</span>
+)</code></pre>
+<p>I then created a function to build a matrix from the coordinates in my tibbles.</p>
+<pre class="sourceCode r"><code class="sourceCode r">create_matrix &lt;-<span class="st"> </span><span class="cf">function</span>(x_start, x_end, y_start, y_end, <span class="dt">dim =</span> <span class="dv">9</span>, ...) {
+  
+  out &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dt">nrow =</span> dim, <span class="dt">ncol =</span> dim)
+  
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_len</span>(dim)) {
+    <span class="cf">for</span> (j <span class="cf">in</span> <span class="kw">seq_len</span>(dim)) {
+      
+      i_in_x_domain &lt;-<span class="st"> </span>i <span class="op">&gt;=</span><span class="st"> </span>x_start <span class="op">&amp;</span><span class="st"> </span>i <span class="op">&lt;=</span><span class="st"> </span>x_end
+      j_in_y_domain &lt;-<span class="st"> </span>j <span class="op">&gt;=</span><span class="st"> </span>y_start <span class="op">&amp;</span><span class="st"> </span>j <span class="op">&lt;=</span><span class="st"> </span>y_end
+      
+      value &lt;-<span class="st"> </span><span class="dv">1</span> <span class="op">*</span><span class="st"> </span>(i_in_x_domain <span class="op">*</span><span class="st"> </span>j_in_y_domain)
+      
+      out[j,i] &lt;-<span class="st"> </span>value
+  
+    }
+  }
+  
+  out
+  
+}</code></pre>
+<p>Once I had my matrices, it was just a matter of adding them up…</p>
+<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">pmap</span>(test1, create_matrix)[[<span class="dv">1</span>]]
+b &lt;-<span class="st"> </span><span class="kw">pmap</span>(test2, create_matrix)[[<span class="dv">1</span>]]
+
+(c &lt;-<span class="st"> </span>a <span class="op">+</span><span class="st"> </span>b)</code></pre>
+<pre><code>##       [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9]
+##  [1,]    0    0    0    0    0    0    0    0    0
+##  [2,]    0    0    0    1    1    1    1    0    0
+##  [3,]    0    0    0    1    1    1    1    0    0
+##  [4,]    0    1    1    2    2    1    1    0    0
+##  [5,]    0    1    1    2    2    1    1    0    0
+##  [6,]    0    1    1    1    1    0    0    0    0
+##  [7,]    0    1    1    1    1    0    0    0    0
+##  [8,]    0    0    0    0    0    0    0    0    0
+##  [9,]    0    0    0    0    0    0    0    0    0</code></pre>
+<p>..and counting the number of entries greater than 1.</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sum</span>(c <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</code></pre>
+<pre><code>## [1] 4</code></pre>
+<p>The above steps can be piped as such:</p>
+<pre class="sourceCode r"><code class="sourceCode r">test &lt;-<span class="st"> </span><span class="kw">bind_rows</span>(test1, test2)
+
+test <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">pmap</span>(create_matrix) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">reduce</span>(<span class="st">`</span><span class="dt">+</span><span class="st">`</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>{<span class="kw">sum</span>(. <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)}</code></pre>
+<pre><code>## [1] 4</code></pre>
+<p>Although the logic is sound (and gives the right answer!), this approach takes quite a bit of time to compute. A better alternative would have been perhaps to create only <em>one</em> matrix and then <em>recursively</em> add up the entries.</p>
+<p>Here is the code I used to get the answer (i.e. <code>97218</code>).</p>
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(
+  <span class="dt">input =</span> puzzle_input,
+  <span class="dt">id        =</span> <span class="kw">str_replace</span>(input, <span class="st">&quot;(</span><span class="ch">\\</span><span class="st">#.*) </span><span class="ch">\\</span><span class="st">@.*&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">1&quot;</span>),
+  <span class="dt">from_left =</span> <span class="kw">str_replace</span>(input, <span class="st">&quot;.* (.*),.*&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">1&quot;</span>),
+  <span class="dt">from_top  =</span> <span class="kw">str_replace</span>(input, <span class="st">&quot;.*,(.*):.*&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">1&quot;</span>),
+  <span class="dt">width     =</span> <span class="kw">str_replace</span>(input, <span class="st">&quot;.*: (.*)x.*&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">1&quot;</span>),
+  <span class="dt">height    =</span> <span class="kw">str_replace</span>(input, <span class="st">&quot;.*x(.*)&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">1&quot;</span>)
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(from_left<span class="op">:</span>height), as.numeric) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">x_start =</span> from_left <span class="op">+</span><span class="st"> </span><span class="dv">1</span>,
+    <span class="dt">x_end   =</span> from_left <span class="op">+</span><span class="st"> </span>width,
+    <span class="dt">y_start =</span> from_top <span class="op">+</span><span class="st"> </span><span class="dv">1</span>,
+    <span class="dt">y_end   =</span> from_top <span class="op">+</span><span class="st"> </span>height
+    ) 
+
+matrices &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>{<span class="kw">set_names</span>(.<span class="op">$</span>id)} <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pmap</span>(create_matrix2, <span class="dt">dim =</span> <span class="dv">1000</span>) <span class="co"># 9.2 Gb</span>
+
+matrices <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">reduce</span>(<span class="st">`</span><span class="dt">+</span><span class="st">`</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>{<span class="kw">sum</span>(. <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)}</code></pre>
+</div>
+<div id="what-is-the-id-of-the-only-claim-that-doesnt-overlap" class="section level2">
+<h2><span class="header-section-number">3.2</span> What is the ID of the only claim that doesn’t overlap?</h2>
+<p>Very easy, once all the matrices were created:</p>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Name the list</span>
+<span class="kw">names</span>(matrices) &lt;-<span class="st"> </span>df<span class="op">$</span>id 
+
+<span class="co"># Cases where there&#39;s no overlap</span>
+matrix_wo_overlap &lt;-<span class="st"> </span>matrices <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">reduce</span>(<span class="st">`</span><span class="dt">+</span><span class="st">`</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>{<span class="dv">1</span> <span class="op">*</span><span class="st"> </span>(. <span class="op">==</span><span class="st"> </span><span class="dv">1</span>)}
+
+<span class="co"># Keep only the matrices with entries overlapping those of matrix_wo_overlap</span>
+matrices <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">keep</span>(<span class="op">~</span><span class="st"> </span><span class="kw">all</span>(.x <span class="op">&lt;=</span><span class="st"> </span>matrix_wo_overlap <span class="op">&amp;</span><span class="st"> </span>.x <span class="op">&gt;=</span><span class="st"> </span><span class="dv">0</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">names</span>()</code></pre>
+<p>Which gives lucky <code>#717</code>!</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="day2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="day4.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["advent-of-code-2018.pdf", "advent-of-code-2018.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

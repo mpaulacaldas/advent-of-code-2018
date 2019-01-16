@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Day 2 Inventory Management System | Advent of Code 2018</title>
+  <meta name="description" content="My attempt at the 2018 Advent of Code puzzles.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Day 2 Inventory Management System | Advent of Code 2018 />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="My attempt at the 2018 Advent of Code puzzles." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Day 2 Inventory Management System | Advent of Code 2018 />
+  
+  <meta name="twitter:description" content="My attempt at the 2018 Advent of Code puzzles." />
+  
+
+<meta name="author" content="María Paula Caldas">
+
+
+<meta name="date" content="2019-01-17">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="day1.html">
+<link rel="next" href="day3.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Advent of Code 2018</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Technical details</a></li>
+<li class="chapter" data-level="1" data-path="day1.html"><a href="day1.html"><i class="fa fa-check"></i><b>1</b> Chronal Calibration</a><ul>
+<li class="chapter" data-level="" data-path="day1.html"><a href="day1.html#instructions"><i class="fa fa-check"></i>Instructions</a></li>
+<li class="chapter" data-level="1.1" data-path="day1.html"><a href="day1.html#starting-with-a-frequency-of-zero-what-is-the-resulting-frequency-after-all-of-the-changes-in-frequency-have-been-applied"><i class="fa fa-check"></i><b>1.1</b> Starting with a frequency of zero, what is the resulting frequency after all of the changes in frequency have been applied?</a></li>
+<li class="chapter" data-level="1.2" data-path="day1.html"><a href="day1.html#what-is-the-first-frequency-your-device-reaches-twice"><i class="fa fa-check"></i><b>1.2</b> What is the first frequency your device reaches twice?</a></li>
+<li class="chapter" data-level="" data-path="day1.html"><a href="day1.html#failed-attempts"><i class="fa fa-check"></i>Failed attempts</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="day2.html"><a href="day2.html"><i class="fa fa-check"></i><b>2</b> Inventory Management System</a><ul>
+<li class="chapter" data-level="" data-path="day2.html"><a href="day2.html#instructions-1"><i class="fa fa-check"></i>Instructions</a></li>
+<li class="chapter" data-level="2.1" data-path="day2.html"><a href="day2.html#what-is-the-checksum-for-your-list-of-box-ids"><i class="fa fa-check"></i><b>2.1</b> What is the checksum for your list of box IDs?</a></li>
+<li class="chapter" data-level="2.2" data-path="day2.html"><a href="day2.html#what-letters-are-common-between-the-two-correct-box-ids"><i class="fa fa-check"></i><b>2.2</b> What letters are common between the two correct box IDs?</a><ul>
+<li class="chapter" data-level="" data-path="day2.html"><a href="day2.html#for-future-reference"><i class="fa fa-check"></i>For future reference</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="day3.html"><a href="day3.html"><i class="fa fa-check"></i><b>3</b> No Matter How You Slice It</a><ul>
+<li class="chapter" data-level="" data-path="day3.html"><a href="day3.html#instructions-2"><i class="fa fa-check"></i>Instructions</a></li>
+<li class="chapter" data-level="3.1" data-path="day3.html"><a href="day3.html#how-many-square-inches-of-fabric-are-within-two-or-more-claims"><i class="fa fa-check"></i><b>3.1</b> How many square inches of fabric are within two or more claims?</a></li>
+<li class="chapter" data-level="3.2" data-path="day3.html"><a href="day3.html#what-is-the-id-of-the-only-claim-that-doesnt-overlap"><i class="fa fa-check"></i><b>3.2</b> What is the ID of the only claim that doesn’t overlap?</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="day4.html"><a href="day4.html"><i class="fa fa-check"></i><b>4</b> Repose Record</a><ul>
+<li class="chapter" data-level="" data-path="day4.html"><a href="day4.html#instructions-3"><i class="fa fa-check"></i>Instructions</a></li>
+<li class="chapter" data-level="4.1" data-path="day4.html"><a href="day4.html#what-is-the-id-of-the-guard-you-chose-multiplied-by-the-minute-you-chose"><i class="fa fa-check"></i><b>4.1</b> What is the ID of the guard you chose multiplied by the minute you chose?</a></li>
+<li class="chapter" data-level="4.2" data-path="day4.html"><a href="day4.html#of-all-guards-which-guard-is-most-frequently-asleep-on-the-same-minute"><i class="fa fa-check"></i><b>4.2</b> Of all guards, which guard is most frequently asleep on the same minute?</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="day5.html"><a href="day5.html"><i class="fa fa-check"></i><b>5</b> Alchemical Reduction</a><ul>
+<li class="chapter" data-level="" data-path="day5.html"><a href="day5.html#instructions-4"><i class="fa fa-check"></i>Instructions</a></li>
+<li class="chapter" data-level="5.1" data-path="day5.html"><a href="day5.html#how-many-units-remain-after-fully-reacting-the-polymer-you-scanned"><i class="fa fa-check"></i><b>5.1</b> How many units remain after fully reacting the polymer you scanned?</a></li>
+<li class="chapter" data-level="5.2" data-path="day5.html"><a href="day5.html#what-is-the-length-of-the-shortest-polymer-you-can-produce-by-removing-all-units-of-exactly-one-type-and-fully-reacting-the-result"><i class="fa fa-check"></i><b>5.2</b> What is the length of the shortest polymer you can produce by removing all units of exactly one type and fully reacting the result?</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="day6.html"><a href="day6.html"><i class="fa fa-check"></i><b>6</b> Alchemical Reduction</a><ul>
+<li class="chapter" data-level="" data-path="day6.html"><a href="day6.html#instructions-5"><i class="fa fa-check"></i>Instructions</a></li>
+<li class="chapter" data-level="6.1" data-path="day6.html"><a href="day6.html#what-is-the-size-of-the-largest-area-that-isnt-infinite"><i class="fa fa-check"></i><b>6.1</b> What is the size of the largest area that isn’t infinite?</a></li>
+<li class="chapter" data-level="6.2" data-path="day6.html"><a href="day6.html#what-is-the-size-of-the-region-containing-all-locations-which-have-a-total-distance-to-all-given-coordinates-of-less-than-10000"><i class="fa fa-check"></i><b>6.2</b> What is the size of the region containing all locations which have a total distance to all given coordinates of less than 10000?</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Advent of Code 2018</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="day2" class="section level1">
+<h1><span class="header-section-number">Day 2</span> Inventory Management System</h1>
+<div id="instructions-1" class="section level2 unnumbered">
+<h2>Instructions</h2>
+<p>You stop falling through time, catch your breath, and check the screen on the device. “Destination reached. Current Year: 1518. Current Location: North Pole Utility Closet 83N10.” You made it! Now, to find those anomalies.</p>
+<p>Outside the utility closet, you hear footsteps and a voice. “…I’m not sure either. But now that so many people have chimneys, maybe he could sneak in that way?” Another voice responds, “Actually, we’ve been working on a new kind of suit that would let him fit through tight spaces like that. But, I heard that a few days ago, they lost the prototype fabric, the design plans, everything! Nobody on the team can even seem to remember important details of the project!”</p>
+<p>“Wouldn’t they have had enough fabric to fill several boxes in the warehouse? They’d be stored together, so the box IDs should be similar. Too bad it would take forever to search the warehouse for two similar box IDs…” They walk too far away to hear any more.</p>
+<p>Late at night, you sneak to the warehouse - who knows what kinds of paradoxes you could cause if you were discovered - and use your fancy wrist device to quickly scan every box and produce a list of the likely candidates (your puzzle input).</p>
+<p>To make sure you didn’t miss any, you scan the likely candidate boxes again, counting the number that have an ID containing exactly two of any letter and then separately counting those with exactly three of any letter. You can multiply those two counts together to get a rudimentary checksum and compare it to what your device predicts.</p>
+<p>For example, if you see the following box IDs:</p>
+<ul>
+<li>abcdef contains no letters that appear exactly two or three times.</li>
+<li>bababc contains two a and three b, so it counts for both.</li>
+<li>abbcde contains two b, but no letter appears exactly three times.</li>
+<li>abcccd contains three c, but no letter appears exactly two times.</li>
+<li>aabcdd contains two a and two d, but it only counts once.</li>
+<li>abcdee contains two e.</li>
+<li>ababab contains three a and three b, but it only counts once.</li>
+</ul>
+<p>Of these box IDs, four of them contain a letter which appears exactly twice, and three of them contain a letter which appears exactly three times. Multiplying these together produces a checksum of 4 * 3 = 12.</p>
+<p><strong>What is the checksum for your list of box IDs?</strong></p>
+<p>Confident that your list of box IDs is complete, you’re ready to find the boxes full of prototype fabric.</p>
+<p>The boxes will have IDs which differ by exactly one character at the same position in both strings. For example, given the following box IDs:</p>
+<pre><code>abcde
+fghij
+klmno
+pqrst
+fguij
+axcye
+wvxyz</code></pre>
+<p>The IDs abcde and axcye are close, but they differ by two characters (the second and fourth). However, the IDs fghij and fguij differ by exactly one character, the third (h and u). Those must be the correct boxes.</p>
+<p><strong>What letters are common between the two correct box IDs?</strong> (In the example above, this is found by removing the differing character from either ID, producing fgij.)</p>
+</div>
+<div id="what-is-the-checksum-for-your-list-of-box-ids" class="section level2">
+<h2><span class="header-section-number">2.1</span> What is the checksum for your list of box IDs?</h2>
+<p>Import puzzle imput for the day:</p>
+<pre class="sourceCode r"><code class="sourceCode r">puzzle_input &lt;-<span class="st"> </span><span class="kw">readLines</span>(<span class="st">&quot;data-raw/day2.txt&quot;</span>, <span class="dt">warn =</span> <span class="ot">FALSE</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">any_rep &lt;-<span class="st"> </span><span class="cf">function</span>(id, <span class="dt">rep =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">3</span>)) {
+  count_per_letter &lt;-<span class="st"> </span><span class="kw">map_int</span>(letters, <span class="op">~</span><span class="st"> </span><span class="kw">str_count</span>(id, .x))
+  <span class="kw">any</span>(count_per_letter <span class="op">==</span><span class="st"> </span>rep)
+  
+}
+
+<span class="kw">tibble</span>(
+  <span class="dt">input =</span> puzzle_input, 
+  <span class="dt">any_twice =</span> <span class="kw">map_lgl</span>(input, any_rep, <span class="dt">rep =</span> <span class="dv">2</span>),
+  <span class="dt">any_thrice =</span> <span class="kw">map_lgl</span>(input, any_rep, <span class="dt">rep =</span> <span class="dv">3</span>)
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n_twice =</span> <span class="kw">sum</span>(any_twice), <span class="dt">n_thrice =</span> <span class="kw">sum</span>(any_thrice)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">cumcheck =</span> n_twice <span class="op">*</span><span class="st"> </span>n_thrice)</code></pre>
+<pre><code>## # A tibble: 1 x 3
+##   n_twice n_thrice cumcheck
+##     &lt;int&gt;    &lt;int&gt;    &lt;int&gt;
+## 1     247       31     7657</code></pre>
+</div>
+<div id="what-letters-are-common-between-the-two-correct-box-ids" class="section level2">
+<h2><span class="header-section-number">2.2</span> What letters are common between the two correct box IDs?</h2>
+<p>This one took me a while, but it taught me the following lessons:</p>
+<ul>
+<li><p>Never forget to vectorise functions, especially those that are going to go through a <code>dplyr::mutate()</code></p></li>
+<li><p><code>purrr::cross_df()</code> is awesome, although not the right tool for this type of problem (you end up with twice the number of combinations than needed)</p></li>
+</ul>
+<pre class="sourceCode r"><code class="sourceCode r">are_almost_same &lt;-<span class="st"> </span><span class="cf">function</span>(vector1, vector2) {
+  
+  are_almost_same_ &lt;-<span class="st"> </span><span class="cf">function</span>(string1, string2) {
+  
+    chars1 &lt;-<span class="st"> </span><span class="kw">str_split</span>(string1, <span class="st">&quot;&quot;</span>)[[<span class="dv">1</span>]]
+    chars2 &lt;-<span class="st"> </span><span class="kw">str_split</span>(string2, <span class="st">&quot;&quot;</span>)[[<span class="dv">1</span>]]
+    
+    <span class="kw">sum</span>(chars1 <span class="op">==</span><span class="st"> </span>chars2) <span class="op">==</span><span class="st"> </span><span class="dv">25</span> <span class="co"># length of character string - 1</span>
+  }
+  
+  <span class="kw">map2_lgl</span>(vector1, vector2, are_almost_same_)
+}
+
+get_common_letters_ &lt;-<span class="st"> </span><span class="cf">function</span>(string1, string2) {
+  
+  chars1 &lt;-<span class="st"> </span><span class="kw">str_split</span>(string1, <span class="st">&quot;&quot;</span>)[[<span class="dv">1</span>]]
+  chars2 &lt;-<span class="st"> </span><span class="kw">str_split</span>(string2, <span class="st">&quot;&quot;</span>)[[<span class="dv">1</span>]]
+  
+  <span class="kw">paste0</span>(chars1[chars1 <span class="op">==</span><span class="st"> </span>chars2], <span class="dt">collapse =</span> <span class="st">&quot;&quot;</span>)
+  
+}
+
+puzzle_input <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">list</span>(<span class="dt">x =</span> ., <span class="dt">y =</span> .) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">cross_df</span>(<span class="dt">.filter =</span> <span class="st">`</span><span class="dt">==</span><span class="st">`</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">are_almost_same =</span> <span class="kw">are_almost_same</span>(x, y)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(are_almost_same) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># because of the cross_df()</span>
+<span class="st">  </span>{<span class="kw">get_common_letters_</span>(.<span class="op">$</span>x, .<span class="op">$</span>y)}</code></pre>
+<pre><code>## [1] &quot;ivjhcadokeltwgsfsmqwrbnuy&quot;</code></pre>
+<div id="for-future-reference" class="section level3 unnumbered">
+<h3>For future reference</h3>
+<p>Comparing two character strings, word by word:</p>
+<pre class="sourceCode r"><code class="sourceCode r">test_input1 &lt;-<span class="st"> </span><span class="kw">str_split</span>(puzzle_input[<span class="dv">1</span>], <span class="st">&quot;&quot;</span>)[[<span class="dv">1</span>]]
+test_input2 &lt;-<span class="st"> </span><span class="kw">str_split</span>(puzzle_input[<span class="dv">2</span>], <span class="st">&quot;&quot;</span>)[[<span class="dv">1</span>]]
+
+test_input1 <span class="op">==</span><span class="st"> </span>test_input2</code></pre>
+<pre><code>##  [1]  TRUE  TRUE FALSE  TRUE  TRUE FALSE FALSE  TRUE  TRUE  TRUE  TRUE
+## [12]  TRUE  TRUE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE  TRUE  TRUE FALSE
+## [23]  TRUE  TRUE  TRUE  TRUE</code></pre>
+<p>Scaling it up:</p>
+<pre class="sourceCode r"><code class="sourceCode r">count_matching_chars &lt;-<span class="st"> </span><span class="cf">function</span>(vector1, vector2) {
+  
+  count_matching_chars_ &lt;-<span class="st"> </span><span class="cf">function</span>(string1, string2) {
+  
+    chars1 &lt;-<span class="st"> </span><span class="kw">str_split</span>(string1, <span class="st">&quot;&quot;</span>)[[<span class="dv">1</span>]]
+    chars2 &lt;-<span class="st"> </span><span class="kw">str_split</span>(string2, <span class="st">&quot;&quot;</span>)[[<span class="dv">1</span>]]
+    
+    <span class="kw">sum</span>(chars1 <span class="op">==</span><span class="st"> </span>chars2)
+  }
+  
+  <span class="co"># Don&#39;t forget to vectorise!</span>
+  <span class="kw">map2_int</span>(vector1, vector2, count_matching_chars_)
+}
+
+<span class="kw">c</span>(<span class="st">&quot;case&quot;</span>, <span class="st">&quot;base&quot;</span>, <span class="st">&quot;cata&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">list</span>(<span class="dt">x =</span> ., <span class="dt">y =</span> .) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">cross_df</span>(<span class="dt">.filter =</span> <span class="st">`</span><span class="dt">==</span><span class="st">`</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">n_matching_chars =</span> <span class="kw">count_matching_chars</span>(x, y))</code></pre>
+<pre><code>## # A tibble: 6 x 3
+##   x     y     n_matching_chars
+##   &lt;chr&gt; &lt;chr&gt;            &lt;int&gt;
+## 1 base  case                 3
+## 2 cata  case                 2
+## 3 case  base                 3
+## 4 cata  base                 1
+## 5 case  cata                 2
+## 6 base  cata                 1</code></pre>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="day1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="day3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["advent-of-code-2018.pdf", "advent-of-code-2018.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

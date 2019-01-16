@@ -1,0 +1,214 @@
+# Alchemical Reduction {#day6}
+
+## Instructions {-}
+
+The device on your wrist beeps several times, and once again you feel like you're falling.
+
+"Situation critical," the device announces. "Destination indeterminate. Chronal interference detected. Please specify new target coordinates."
+
+The device then produces a list of coordinates (your puzzle input). Are they places it thinks are safe or dangerous? It recommends you check manual page 729. The Elves did not give you a manual.
+
+If they're dangerous, maybe you can minimize the danger by finding the coordinate that gives the largest distance from the other points.
+
+Using only the Manhattan distance, determine the area around each coordinate by counting the number of integer X,Y locations that are closest to that coordinate (and aren't tied in distance to any other coordinate).
+
+Your goal is to find the size of the largest area that isn't infinite. For example, consider the following list of coordinates:
+
+```
+1, 1
+1, 6
+8, 3
+3, 4
+5, 5
+8, 9
+```
+
+If we name these coordinates A through F, we can draw them on a grid, putting 0,0 at the top left:
+
+```
+..........
+.A........
+..........
+........C.
+...D......
+.....E....
+.B........
+..........
+..........
+........F.
+```
+
+This view is partial - the actual grid extends infinitely in all directions. Using the Manhattan distance, each location's closest coordinate can be determined, shown here in lowercase:
+
+```
+aaaaa.cccc
+aAaaa.cccc
+aaaddecccc
+aadddeccCc
+..dDdeeccc
+bb.deEeecc
+bBb.eeee..
+bbb.eeefff
+bbb.eeffff
+bbb.ffffFf
+```
+
+Locations shown as . are equally far from two or more coordinates, and so they don't count as being closest to any.
+
+In this example, the areas of coordinates A, B, C, and F are infinite - while not shown here, their areas extend forever outside the visible grid. However, the areas of coordinates D and E are finite: D is closest to 9 locations, and E is closest to 17 (both including the coordinate's location itself). Therefore, in this example, the size of the largest area is 17.
+
+** What is the size of the largest area that isn't infinite?**
+
+On the other hand, if the coordinates are safe, maybe the best you can do is try to find a region near as many coordinates as possible.
+
+For example, suppose you want the sum of the Manhattan distance to all of the coordinates to be less than 32. For each location, add up the distances to all of the given coordinates; if the total of those distances is less than 32, that location is within the desired region. Using the same coordinates as above, the resulting region looks like this:
+
+```
+..........
+.A........
+..........
+...###..C.
+..#D###...
+..###E#...
+.B.###....
+..........
+..........
+........F.
+```
+
+In particular, consider the highlighted location 4,3 located at the top middle of the region. Its calculation is as follows, where abs() is the absolute value function:
+
+- Distance to coordinate A: abs(4-1) + abs(3-1) =  5
+- Distance to coordinate B: abs(4-1) + abs(3-6) =  6
+- Distance to coordinate C: abs(4-8) + abs(3-3) =  4
+- Distance to coordinate D: abs(4-3) + abs(3-4) =  2
+- Distance to coordinate E: abs(4-5) + abs(3-5) =  3
+- Distance to coordinate F: abs(4-8) + abs(3-9) = 10
+- Total distance: 5 + 6 + 4 + 2 + 3 + 10 = 30
+
+Because the total distance to all coordinates (30) is less than 32, the location is within the region.
+
+This region, which also includes coordinates D and E, has a total size of 16.
+
+Your actual region will need to be much larger than this example, though, instead including all locations with a total distance of less than 10000.
+
+** What is the size of the region containing all locations which have a total distance to all given coordinates of less than 10000?**
+
+## What is the size of the largest area that isn't infinite?
+
+```{r, include=FALSE}
+library(tidyverse)
+```
+
+Import puzzle imput for the day:
+
+```{r}
+input <- read_csv("data-raw/day6.txt", col_names = c("x", "y"))
+```
+
+```{r, message=FALSE}
+dim_grid <- input %>% 
+  summarise_all(c("min", "max"))
+
+grid <- dim_grid %>% 
+  {list("x" = seq(.$x_min, .$x_max), "y" = seq(.$y_min, .$y_max))} %>% 
+  cross_df() %>% 
+  anti_join(input) # remove the coordinates from the input
+
+
+# What is (are) the closest location(s) to a given point in the grid?
+(grid_i <- grid[1, ])
+input %>% 
+  mutate(
+    x2 = grid_i$x,
+    y2 = grid_i$y,
+    dist = abs(x - x2) + abs(y - y2)
+    ) %>% 
+  filter(dist == min(dist))
+
+# Let's do this for every point in the grid
+
+get_closest_locations <- function(x2, y2) {
+  input %>% 
+    mutate(
+      x2 = x2,
+      y2 = y2,
+      dist = abs(x - x2) + abs(y - y2)
+      ) %>% 
+    filter(dist == min(dist))
+}
+
+grid_min_dists <- grid %>% 
+  pmap(get_closest_locations) %>% 
+  keep(~ nrow(.) == 1) %>% 
+  bind_rows()
+
+# Hmm... This won't remove the infinite one ==> TOO HIGH!
+grid_min_dists2 <- grid_min_dists %>% 
+  group_by(x2, y2) %>% 
+  mutate(n = n()) %>% 
+  ungroup() %>% 
+  filter(n == 1) %>% 
+  count(x, y, sort = TRUE) %>% 
+  top_n(1)
+
+candidates <- grid_min_dists %>% 
+  group_by(x, y) %>% 
+  summarise_at(c("x2", "y2"), c("min", "max")) %>% 
+  ungroup() %>% 
+  mutate(
+    x_max_bounded = x2_max < max(x2_max),
+    y_max_bounded = y2_max < max(y2_max),
+    x_min_bounded = x2_min > min(x2_min),
+    y_min_bounded = y2_min > min(y2_min),
+    n_bounds = x_max_bounded + y_max_bounded + x_min_bounded + y_min_bounded
+    ) %>% 
+  filter(n_bounds == 4)
+
+grid_min_dists %>% 
+  semi_join(candidates, by = c("x", "y")) %>% 
+  count(x, y, sort = TRUE) %>% 
+  slice(1) %>% 
+  pull(n) %>% 
+  `+`(1) # because the fucking origin location counts!
+```
+
+```{r}
+# Another logic: let's get the 4 points that are the furthest way from each
+# other. These should give me the bounds of my section.
+```
+
+## What is the size of the region containing all locations which have a total distance to all given coordinates of less than 10000?
+
+```{r}
+grid <- dim_grid %>% 
+  {list("x" = seq(.$x_min, .$x_max), "y" = seq(.$y_min, .$y_max))} %>% 
+  cross_df()
+
+grid_i <- grid[1, ]
+
+input %>% 
+  summarise(sum_dist = sum(abs(x - grid_i$x) + abs(y - grid_i$y)))
+
+get_sumdist_to_all_locations <- function(x2, y2) {
+  sum(abs(input$x - x2) + abs(input$y - y2))
+}
+
+grid_sumdist <- grid %>% 
+  mutate(sumdist = pmap_int(., get_sumdist_to_all_locations)) %>% 
+  filter(sumdist < 10000)
+
+# Check for gaps
+grid_sumdist %>% 
+  count(x) %>% 
+  arrange(n)
+
+grid_sumdist %>% 
+  count(y) %>% 
+  arrange(n)
+
+grid_sumdist %>% 
+  distinct(x, y) %>% 
+  nrow()
+```
+

@@ -2,4 +2,5 @@
 
 My attempt with R.
 
-https://adventofcode.com/
+Official site: https://adventofcode.com/
+Bookdown with my answers: https://mpaulacaldas.github.io/advent-of-code-2018/

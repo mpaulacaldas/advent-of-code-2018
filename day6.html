@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Day 6 Alchemical Reduction | Advent of Code 2018</title>
+  <meta name="description" content="My attempt at the 2018 Advent of Code puzzles.">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+
+  <meta property="og:title" content="Day 6 Alchemical Reduction | Advent of Code 2018 />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="My attempt at the 2018 Advent of Code puzzles." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Day 6 Alchemical Reduction | Advent of Code 2018 />
+  
+  <meta name="twitter:description" content="My attempt at the 2018 Advent of Code puzzles." />
+  
+
+<meta name="author" content="María Paula Caldas">
+
+
+<meta name="date" content="2019-01-17">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="day5.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Advent of Code 2018</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Technical details</a></li>
+<li class="chapter" data-level="1" data-path="day1.html"><a href="day1.html"><i class="fa fa-check"></i><b>1</b> Chronal Calibration</a><ul>
+<li class="chapter" data-level="" data-path="day1.html"><a href="day1.html#instructions"><i class="fa fa-check"></i>Instructions</a></li>
+<li class="chapter" data-level="1.1" data-path="day1.html"><a href="day1.html#starting-with-a-frequency-of-zero-what-is-the-resulting-frequency-after-all-of-the-changes-in-frequency-have-been-applied"><i class="fa fa-check"></i><b>1.1</b> Starting with a frequency of zero, what is the resulting frequency after all of the changes in frequency have been applied?</a></li>
+<li class="chapter" data-level="1.2" data-path="day1.html"><a href="day1.html#what-is-the-first-frequency-your-device-reaches-twice"><i class="fa fa-check"></i><b>1.2</b> What is the first frequency your device reaches twice?</a></li>
+<li class="chapter" data-level="" data-path="day1.html"><a href="day1.html#failed-attempts"><i class="fa fa-check"></i>Failed attempts</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="day2.html"><a href="day2.html"><i class="fa fa-check"></i><b>2</b> Inventory Management System</a><ul>
+<li class="chapter" data-level="" data-path="day2.html"><a href="day2.html#instructions-1"><i class="fa fa-check"></i>Instructions</a></li>
+<li class="chapter" data-level="2.1" data-path="day2.html"><a href="day2.html#what-is-the-checksum-for-your-list-of-box-ids"><i class="fa fa-check"></i><b>2.1</b> What is the checksum for your list of box IDs?</a></li>
+<li class="chapter" data-level="2.2" data-path="day2.html"><a href="day2.html#what-letters-are-common-between-the-two-correct-box-ids"><i class="fa fa-check"></i><b>2.2</b> What letters are common between the two correct box IDs?</a><ul>
+<li class="chapter" data-level="" data-path="day2.html"><a href="day2.html#for-future-reference"><i class="fa fa-check"></i>For future reference</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="day3.html"><a href="day3.html"><i class="fa fa-check"></i><b>3</b> No Matter How You Slice It</a><ul>
+<li class="chapter" data-level="" data-path="day3.html"><a href="day3.html#instructions-2"><i class="fa fa-check"></i>Instructions</a></li>
+<li class="chapter" data-level="3.1" data-path="day3.html"><a href="day3.html#how-many-square-inches-of-fabric-are-within-two-or-more-claims"><i class="fa fa-check"></i><b>3.1</b> How many square inches of fabric are within two or more claims?</a></li>
+<li class="chapter" data-level="3.2" data-path="day3.html"><a href="day3.html#what-is-the-id-of-the-only-claim-that-doesnt-overlap"><i class="fa fa-check"></i><b>3.2</b> What is the ID of the only claim that doesn’t overlap?</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="day4.html"><a href="day4.html"><i class="fa fa-check"></i><b>4</b> Repose Record</a><ul>
+<li class="chapter" data-level="" data-path="day4.html"><a href="day4.html#instructions-3"><i class="fa fa-check"></i>Instructions</a></li>
+<li class="chapter" data-level="4.1" data-path="day4.html"><a href="day4.html#what-is-the-id-of-the-guard-you-chose-multiplied-by-the-minute-you-chose"><i class="fa fa-check"></i><b>4.1</b> What is the ID of the guard you chose multiplied by the minute you chose?</a></li>
+<li class="chapter" data-level="4.2" data-path="day4.html"><a href="day4.html#of-all-guards-which-guard-is-most-frequently-asleep-on-the-same-minute"><i class="fa fa-check"></i><b>4.2</b> Of all guards, which guard is most frequently asleep on the same minute?</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="day5.html"><a href="day5.html"><i class="fa fa-check"></i><b>5</b> Alchemical Reduction</a><ul>
+<li class="chapter" data-level="" data-path="day5.html"><a href="day5.html#instructions-4"><i class="fa fa-check"></i>Instructions</a></li>
+<li class="chapter" data-level="5.1" data-path="day5.html"><a href="day5.html#how-many-units-remain-after-fully-reacting-the-polymer-you-scanned"><i class="fa fa-check"></i><b>5.1</b> How many units remain after fully reacting the polymer you scanned?</a></li>
+<li class="chapter" data-level="5.2" data-path="day5.html"><a href="day5.html#what-is-the-length-of-the-shortest-polymer-you-can-produce-by-removing-all-units-of-exactly-one-type-and-fully-reacting-the-result"><i class="fa fa-check"></i><b>5.2</b> What is the length of the shortest polymer you can produce by removing all units of exactly one type and fully reacting the result?</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="day6.html"><a href="day6.html"><i class="fa fa-check"></i><b>6</b> Alchemical Reduction</a><ul>
+<li class="chapter" data-level="" data-path="day6.html"><a href="day6.html#instructions-5"><i class="fa fa-check"></i>Instructions</a></li>
+<li class="chapter" data-level="6.1" data-path="day6.html"><a href="day6.html#what-is-the-size-of-the-largest-area-that-isnt-infinite"><i class="fa fa-check"></i><b>6.1</b> What is the size of the largest area that isn’t infinite?</a></li>
+<li class="chapter" data-level="6.2" data-path="day6.html"><a href="day6.html#what-is-the-size-of-the-region-containing-all-locations-which-have-a-total-distance-to-all-given-coordinates-of-less-than-10000"><i class="fa fa-check"></i><b>6.2</b> What is the size of the region containing all locations which have a total distance to all given coordinates of less than 10000?</a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Advent of Code 2018</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="day6" class="section level1">
+<h1><span class="header-section-number">Day 6</span> Alchemical Reduction</h1>
+<div id="instructions-5" class="section level2 unnumbered">
+<h2>Instructions</h2>
+<p>The device on your wrist beeps several times, and once again you feel like you’re falling.</p>
+<p>“Situation critical,” the device announces. “Destination indeterminate. Chronal interference detected. Please specify new target coordinates.”</p>
+<p>The device then produces a list of coordinates (your puzzle input). Are they places it thinks are safe or dangerous? It recommends you check manual page 729. The Elves did not give you a manual.</p>
+<p>If they’re dangerous, maybe you can minimize the danger by finding the coordinate that gives the largest distance from the other points.</p>
+<p>Using only the Manhattan distance, determine the area around each coordinate by counting the number of integer X,Y locations that are closest to that coordinate (and aren’t tied in distance to any other coordinate).</p>
+<p>Your goal is to find the size of the largest area that isn’t infinite. For example, consider the following list of coordinates:</p>
+<pre><code>1, 1
+1, 6
+8, 3
+3, 4
+5, 5
+8, 9</code></pre>
+<p>If we name these coordinates A through F, we can draw them on a grid, putting 0,0 at the top left:</p>
+<pre><code>..........
+.A........
+..........
+........C.
+...D......
+.....E....
+.B........
+..........
+..........
+........F.</code></pre>
+<p>This view is partial - the actual grid extends infinitely in all directions. Using the Manhattan distance, each location’s closest coordinate can be determined, shown here in lowercase:</p>
+<pre><code>aaaaa.cccc
+aAaaa.cccc
+aaaddecccc
+aadddeccCc
+..dDdeeccc
+bb.deEeecc
+bBb.eeee..
+bbb.eeefff
+bbb.eeffff
+bbb.ffffFf</code></pre>
+<p>Locations shown as . are equally far from two or more coordinates, and so they don’t count as being closest to any.</p>
+<p>In this example, the areas of coordinates A, B, C, and F are infinite - while not shown here, their areas extend forever outside the visible grid. However, the areas of coordinates D and E are finite: D is closest to 9 locations, and E is closest to 17 (both including the coordinate’s location itself). Therefore, in this example, the size of the largest area is 17.</p>
+<p>** What is the size of the largest area that isn’t infinite?**</p>
+<p>On the other hand, if the coordinates are safe, maybe the best you can do is try to find a region near as many coordinates as possible.</p>
+<p>For example, suppose you want the sum of the Manhattan distance to all of the coordinates to be less than 32. For each location, add up the distances to all of the given coordinates; if the total of those distances is less than 32, that location is within the desired region. Using the same coordinates as above, the resulting region looks like this:</p>
+<pre><code>..........
+.A........
+..........
+...###..C.
+..#D###...
+..###E#...
+.B.###....
+..........
+..........
+........F.</code></pre>
+<p>In particular, consider the highlighted location 4,3 located at the top middle of the region. Its calculation is as follows, where abs() is the absolute value function:</p>
+<ul>
+<li>Distance to coordinate A: abs(4-1) + abs(3-1) = 5</li>
+<li>Distance to coordinate B: abs(4-1) + abs(3-6) = 6</li>
+<li>Distance to coordinate C: abs(4-8) + abs(3-3) = 4</li>
+<li>Distance to coordinate D: abs(4-3) + abs(3-4) = 2</li>
+<li>Distance to coordinate E: abs(4-5) + abs(3-5) = 3</li>
+<li>Distance to coordinate F: abs(4-8) + abs(3-9) = 10</li>
+<li>Total distance: 5 + 6 + 4 + 2 + 3 + 10 = 30</li>
+</ul>
+<p>Because the total distance to all coordinates (30) is less than 32, the location is within the region.</p>
+<p>This region, which also includes coordinates D and E, has a total size of 16.</p>
+<p>Your actual region will need to be much larger than this example, though, instead including all locations with a total distance of less than 10000.</p>
+<p>** What is the size of the region containing all locations which have a total distance to all given coordinates of less than 10000?**</p>
+</div>
+<div id="what-is-the-size-of-the-largest-area-that-isnt-infinite" class="section level2">
+<h2><span class="header-section-number">6.1</span> What is the size of the largest area that isn’t infinite?</h2>
+<p>Import puzzle imput for the day:</p>
+<pre class="sourceCode r"><code class="sourceCode r">input &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;data-raw/day6.txt&quot;</span>, <span class="dt">col_names =</span> <span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>))</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   x = col_integer(),
+##   y = col_integer()
+## )</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">dim_grid &lt;-<span class="st"> </span>input <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise_all</span>(<span class="kw">c</span>(<span class="st">&quot;min&quot;</span>, <span class="st">&quot;max&quot;</span>))
+
+grid &lt;-<span class="st"> </span>dim_grid <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>{<span class="kw">list</span>(<span class="st">&quot;x&quot;</span> =<span class="st"> </span><span class="kw">seq</span>(.<span class="op">$</span>x_min, .<span class="op">$</span>x_max), <span class="st">&quot;y&quot;</span> =<span class="st"> </span><span class="kw">seq</span>(.<span class="op">$</span>y_min, .<span class="op">$</span>y_max))} <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">cross_df</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">anti_join</span>(input) <span class="co"># remove the coordinates from the input</span>
+
+
+<span class="co"># What is (are) the closest location(s) to a given point in the grid?</span>
+(grid_i &lt;-<span class="st"> </span>grid[<span class="dv">1</span>, ])</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##       x     y
+##   &lt;int&gt; &lt;int&gt;
+## 1    42    40</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">input <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">x2 =</span> grid_i<span class="op">$</span>x,
+    <span class="dt">y2 =</span> grid_i<span class="op">$</span>y,
+    <span class="dt">dist =</span> <span class="kw">abs</span>(x <span class="op">-</span><span class="st"> </span>x2) <span class="op">+</span><span class="st"> </span><span class="kw">abs</span>(y <span class="op">-</span><span class="st"> </span>y2)
+    ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(dist <span class="op">==</span><span class="st"> </span><span class="kw">min</span>(dist))</code></pre>
+<pre><code>## # A tibble: 1 x 5
+##       x     y    x2    y2  dist
+##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+## 1    42    52    42    40    12</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Let&#39;s do this for every point in the grid</span>
+
+get_closest_locations &lt;-<span class="st"> </span><span class="cf">function</span>(x2, y2) {
+  input <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">mutate</span>(
+      <span class="dt">x2 =</span> x2,
+      <span class="dt">y2 =</span> y2,
+      <span class="dt">dist =</span> <span class="kw">abs</span>(x <span class="op">-</span><span class="st"> </span>x2) <span class="op">+</span><span class="st"> </span><span class="kw">abs</span>(y <span class="op">-</span><span class="st"> </span>y2)
+      ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">filter</span>(dist <span class="op">==</span><span class="st"> </span><span class="kw">min</span>(dist))
+}
+
+grid_min_dists &lt;-<span class="st"> </span>grid <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pmap</span>(get_closest_locations) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">keep</span>(<span class="op">~</span><span class="st"> </span><span class="kw">nrow</span>(.) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">bind_rows</span>()
+
+<span class="co"># Hmm... This won&#39;t remove the infinite one ==&gt; TOO HIGH!</span>
+grid_min_dists2 &lt;-<span class="st"> </span>grid_min_dists <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(x2, y2) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">n =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(n <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(x, y, <span class="dt">sort =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">top_n</span>(<span class="dv">1</span>)
+
+candidates &lt;-<span class="st"> </span>grid_min_dists <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(x, y) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise_at</span>(<span class="kw">c</span>(<span class="st">&quot;x2&quot;</span>, <span class="st">&quot;y2&quot;</span>), <span class="kw">c</span>(<span class="st">&quot;min&quot;</span>, <span class="st">&quot;max&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">x_max_bounded =</span> x2_max <span class="op">&lt;</span><span class="st"> </span><span class="kw">max</span>(x2_max),
+    <span class="dt">y_max_bounded =</span> y2_max <span class="op">&lt;</span><span class="st"> </span><span class="kw">max</span>(y2_max),
+    <span class="dt">x_min_bounded =</span> x2_min <span class="op">&gt;</span><span class="st"> </span><span class="kw">min</span>(x2_min),
+    <span class="dt">y_min_bounded =</span> y2_min <span class="op">&gt;</span><span class="st"> </span><span class="kw">min</span>(y2_min),
+    <span class="dt">n_bounds =</span> x_max_bounded <span class="op">+</span><span class="st"> </span>y_max_bounded <span class="op">+</span><span class="st"> </span>x_min_bounded <span class="op">+</span><span class="st"> </span>y_min_bounded
+    ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(n_bounds <span class="op">==</span><span class="st"> </span><span class="dv">4</span>)
+
+grid_min_dists <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">semi_join</span>(candidates, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(x, y, <span class="dt">sort =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">slice</span>(<span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">pull</span>(n) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  `</span><span class="dt">+</span><span class="st">`</span>(<span class="dv">1</span>) <span class="co"># because the fucking origin location counts!</span></code></pre>
+<pre><code>## [1] 2342</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Another logic: let&#39;s get the 4 points that are the furthest way from each</span>
+<span class="co"># other. These should give me the bounds of my section.</span></code></pre>
+</div>
+<div id="what-is-the-size-of-the-region-containing-all-locations-which-have-a-total-distance-to-all-given-coordinates-of-less-than-10000" class="section level2">
+<h2><span class="header-section-number">6.2</span> What is the size of the region containing all locations which have a total distance to all given coordinates of less than 10000?</h2>
+<pre class="sourceCode r"><code class="sourceCode r">grid &lt;-<span class="st"> </span>dim_grid <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>{<span class="kw">list</span>(<span class="st">&quot;x&quot;</span> =<span class="st"> </span><span class="kw">seq</span>(.<span class="op">$</span>x_min, .<span class="op">$</span>x_max), <span class="st">&quot;y&quot;</span> =<span class="st"> </span><span class="kw">seq</span>(.<span class="op">$</span>y_min, .<span class="op">$</span>y_max))} <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">cross_df</span>()
+
+grid_i &lt;-<span class="st"> </span>grid[<span class="dv">1</span>, ]
+
+input <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">sum_dist =</span> <span class="kw">sum</span>(<span class="kw">abs</span>(x <span class="op">-</span><span class="st"> </span>grid_i<span class="op">$</span>x) <span class="op">+</span><span class="st"> </span><span class="kw">abs</span>(y <span class="op">-</span><span class="st"> </span>grid_i<span class="op">$</span>y)))</code></pre>
+<pre><code>## # A tibble: 1 x 1
+##   sum_dist
+##      &lt;int&gt;
+## 1    15072</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">get_sumdist_to_all_locations &lt;-<span class="st"> </span><span class="cf">function</span>(x2, y2) {
+  <span class="kw">sum</span>(<span class="kw">abs</span>(input<span class="op">$</span>x <span class="op">-</span><span class="st"> </span>x2) <span class="op">+</span><span class="st"> </span><span class="kw">abs</span>(input<span class="op">$</span>y <span class="op">-</span><span class="st"> </span>y2))
+}
+
+grid_sumdist &lt;-<span class="st"> </span>grid <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sumdist =</span> <span class="kw">pmap_int</span>(., get_sumdist_to_all_locations)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(sumdist <span class="op">&lt;</span><span class="st"> </span><span class="dv">10000</span>)
+
+<span class="co"># Check for gaps</span>
+grid_sumdist <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(x) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(n)</code></pre>
+<pre><code>## # A tibble: 224 x 2
+##        x     n
+##    &lt;int&gt; &lt;int&gt;
+##  1    80    10
+##  2   303    23
+##  3    81    33
+##  4   302    37
+##  5    82    50
+##  6   301    50
+##  7   300    62
+##  8    83    65
+##  9   299    70
+## 10    84    74
+## # ... with 214 more rows</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">grid_sumdist <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(y) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(n)</code></pre>
+<pre><code>## # A tibble: 240 x 2
+##        y     n
+##    &lt;int&gt; &lt;int&gt;
+##  1   309    34
+##  2    70    43
+##  3    71    53
+##  4   308    53
+##  5    72    61
+##  6   307    62
+##  7    73    68
+##  8   306    71
+##  9    74    75
+## 10   305    79
+## # ... with 230 more rows</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">grid_sumdist <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">distinct</span>(x, y) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">nrow</span>()</code></pre>
+<pre><code>## [1] 43302</code></pre>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="day5.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["advent-of-code-2018.pdf", "advent-of-code-2018.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
